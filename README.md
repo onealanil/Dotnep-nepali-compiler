@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![NepaliLang Logo](https://your-logo-url-here.com)
+![NepaliLang Logo](https://res.cloudinary.com/dcnm2ql9y/image/upload/v1722616339/mobile_hntylp.png)
 
 [![GitHub license](https://img.shields.io/github/license/your-username/dotnep.svg)](https://github.com/your-username/dotnep/blob/main/LICENSE)
 [![npm version](https://img.shields.io/npm/v/dotnep.svg)](https://www.npmjs.com/package/dotnep)
@@ -73,10 +73,6 @@ For detailed documentation on NepaliLang syntax and features, please refer to ou
 ## 🤝 Contributing
 
 We welcome contributions to the dotnep project! If you're interested in helping improve NepaliLang, please feel free to submit pull requests or open issues on this GitHub repository.
-
-## 📄 License
-
-[Include your chosen license here]
 
 ## 👨‍💻 Author
 

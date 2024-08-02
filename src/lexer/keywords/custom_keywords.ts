@@ -1,0 +1,1 @@
+export const custom_keywords = ["yedi", "nikaal", "rakh", "jaba samma", "navaye", "sahi", "galat", "haina bhane", "jaari rakh", "bhayo", "kaam", "kaam ra firta", "firta"]

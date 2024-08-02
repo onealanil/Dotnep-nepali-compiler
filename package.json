@@ -1,0 +1,19 @@
+{
+  "name": "nepali-compiler",
+  "version": "1.0.0",
+  "description": "A Nepali language compiler",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["compiler", "nepali", "language"],
+  "author": "Your Name",
+  "license": "MIT",
+  "files": ["dist"],
+  "devDependencies": {
+    "@types/node": "^14.14.31",
+    "typescript": "^4.2.3"
+  }
+}

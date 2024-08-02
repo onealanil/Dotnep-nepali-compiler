@@ -1,0 +1,37 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TokenType = void 0;
+//token Types
+var TokenType;
+(function (TokenType) {
+    TokenType["KEYWORD"] = "KEYWORD";
+    TokenType["IDENTIFIER"] = "IDENTIFIER";
+    TokenType["NUMBER"] = "NUMBER";
+    TokenType["OPERATOR"] = "OPERATOR";
+    TokenType["SEMICOLON"] = "SEMICOLON";
+    TokenType["PRINT"] = "PRINT";
+    TokenType["LeftParen"] = "LeftParen";
+    TokenType["RightParen"] = "RightParen";
+    TokenType["LeftBrace"] = "LeftBrace";
+    TokenType["RightBrace"] = "RightBrace";
+    TokenType["EOF"] = "EOF";
+    TokenType["UNKNOWN"] = "UNKNOWN";
+    TokenType["LeftSquare"] = "LeftSquare";
+    TokenType["RightSquare"] = "RightSquare";
+    TokenType["STRING"] = "STRING";
+    TokenType["BOOLEAN"] = "BOOLEAN";
+    TokenType["FUNCTION"] = "FUNCTION";
+    TokenType["RETURN"] = "RETURN";
+    TokenType["IF"] = "IF";
+    TokenType["ELSE"] = "ELSE";
+    TokenType["ELSEIF"] = "ELSEIF";
+    TokenType["WHILE"] = "WHILE";
+    TokenType["FOR"] = "FOR";
+    TokenType["COMMA"] = "COMMA";
+    TokenType["DOT"] = "DOT";
+    TokenType["Null"] = "Null";
+    TokenType["DOUBLEQUOTE"] = "DOUBLEQUOTE";
+    TokenType["INCREMENT"] = "Increment";
+    TokenType["BREAK"] = "BREAK";
+    TokenType["CONTINUE"] = "CONTINUE";
+})(TokenType = exports.TokenType || (exports.TokenType = {}));

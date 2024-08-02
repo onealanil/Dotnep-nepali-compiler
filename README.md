@@ -75,7 +75,8 @@ yedi (a < 3){
 - Full Documentation: [Link to Documentation]
 
 ## 🤝 Contributing
-Contributions are welcome! Please submit pull requests or open issues on the GitHub repository.
+
+We welcome contributions to the dotnep project! If you're interested in helping improve NepaliLang, please feel free to submit pull requests or open issues on this GitHub repository.
 
 ## 👨‍💻 Author
 Created with ❤️ by Anil Bhandari

@@ -10,7 +10,7 @@
 
 NepaliLang (.NEP) - A toy programming language with Nepali syntax
 
-[Playground](https://your-playground-link-here.com) | [Documentation](https://your-documentation-link-here.com) | [npm Package](https://www.npmjs.com/package/dotnep)
+[Playground](https://dotnep.xyz/playground) | [Documentation](https://dotnep.xyz/playground)
 
 </div>
 
@@ -29,7 +29,7 @@ Inspired by Bhailang and leveraging the flexibility of TypeScript, NepaliLang ai
 
 ## 🎮 Try It Out
 
-Experience NepaliLang in our interactive [DocsPlayground](https://your-playground-link-here.com).
+Experience NepaliLang in our interactive [DocsPlayground](https://dotnep.xyz/playground).
 
 > 📢 npm package coming soon!
 
@@ -52,7 +52,7 @@ yedi (a < 3){
 
 ## 📚 Documentation
 
-For detailed documentation on NepaliLang syntax and features, please refer to our [Documentation](https://your-documentation-link-here.com).
+For detailed documentation on NepaliLang syntax and features, please refer to our [Documentation](https://dotnep.xyz/).
 
 ### Key Concepts
 

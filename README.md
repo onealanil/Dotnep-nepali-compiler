@@ -16,6 +16,7 @@ nepali-compiler <path-to-your-file>
 ```
 
 ## 📸 Step-by-Step Example
+[Playground](https://dotnep.xyz/playground) | [Documentation](https://dotnep.xyz/playground)
 
 ### 1. File Creation
 ![File Creation](https://res.cloudinary.com/dcnm2ql9y/image/upload/v1733334725/Screenshot_from_2024-12-04_22-24-03_lj5y7y.png)
@@ -38,7 +39,15 @@ NepaliLang (.NEP) is a toy programming language developed in TypeScript, designe
 
 ### 📝 Basic Syntax Example
 
-```
+Experience NepaliLang in our interactive [DocsPlayground](https://dotnep.xyz/playground).
+
+> 📢 npm package coming soon!
+
+## 🌟 Basic Syntax
+
+Here's a quick example of NepaliLang code:
+
+```nepali
 nikaal "Hello World";
 rakh a = 3;
 
@@ -53,11 +62,15 @@ yedi (a < 3){
 
 ## 🔑 Key Concepts
 
-- Variables: Declared using `rakh`
-- Conditionals: `yedi`, `navaye`, `haina bhane`
-- Loops: Created with `jaba samma`
-- Functions: Defined using `kaam` or `kaam ra firta`
-- Boolean values: `sahi` and `galat`
+For detailed documentation on NepaliLang syntax and features, please refer to our [Documentation](https://dotnep.xyz/).
+
+### Key Concepts
+
+* 📝 Variables are declared using `rakh`
+* 🔀 Conditionals use `yedi`, `navaye`, and `haina bhane`
+* 🔁 Loops are created with `jaba samma`
+* 🛠️ Functions are defined using `kaam` or `kaam ra firta`
+* ✅ Boolean values are represented by `sahi` and `galat`
 
 ## 💻 Supported Operations
 

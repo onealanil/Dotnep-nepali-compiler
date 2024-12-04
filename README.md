@@ -1,5 +1,10 @@
 # NepaliLang (.NEP) - A Toy Programming Language with Nepali Syntax
 
+🌐 Resources
+
+GitHub Repository: https://github.com/onealanil/Dotnep-nepali-compiler
+Playground: https://nepalilang.vercel.app/
+
 ## 🚀 Installation
 
 Install globally via npm:

@@ -1,0 +1,14 @@
+
+    rakh i = 0;
+    nikaal "10 bhanda syano even number haru: ";
+    jaba samma (i < 10) {
+      i = i + 1;
+      yedi (i == 10) {
+        bhayo; 
+      }
+      yedi (i % 2 != 0) {
+        jaari rakh; 
+      }
+      nikaal i;
+    }
+    

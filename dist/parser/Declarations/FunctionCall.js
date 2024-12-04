@@ -7,8 +7,8 @@ const ExpressionParser_1 = require("./ExpressionParser");
 function parseFunctionCall(tokens, cursor, reportError) {
     const nameToken = tokens[cursor];
     if (nameToken.type !== "IDENTIFIER") {
-        reportError(`Expected function name at position ${cursor}`);
-        throw new CustomErrors_1.CustomError(`Expected function name at position ${cursor}`);
+        reportError(`Function name expect gareko thiyo,  at position ${cursor}`);
+        throw new CustomErrors_1.CustomError(`Function name expect gareko thiyo, at position ${cursor}`);
     }
     const callee = {
         type: ast_1.ASTNodeType.Identifier,
@@ -16,8 +16,8 @@ function parseFunctionCall(tokens, cursor, reportError) {
     };
     cursor++;
     if (tokens[cursor].type !== "LeftParen") {
-        reportError(`Expected '(' after function name at position ${cursor}`);
-        throw new CustomErrors_1.CustomError(`Expected '(' after function name at position ${cursor}`);
+        reportError(`'(' expect gareko thiyo, function name pachhi, at position ${cursor}`);
+        throw new CustomErrors_1.CustomError(`'(' expect gareko thiyo, function name pachhi, at position ${cursor}`);
     }
     cursor++;
     const args = [];
@@ -29,18 +29,18 @@ function parseFunctionCall(tokens, cursor, reportError) {
             cursor++;
         }
         else if (tokens[cursor].type !== "RightParen") {
-            reportError(`Expected ',' or ')' at position ${cursor}`);
-            throw new CustomErrors_1.CustomError(`Expected ',' or ')' at position ${cursor}`);
+            reportError(`',' athaba ')' expect gareko thiyo, at position ${cursor}.`);
+            throw new CustomErrors_1.CustomError(` ',' athaba ')' expect gareko thiyo, at position ${cursor}.`);
         }
     }
     if (tokens[cursor].type !== "RightParen") {
-        reportError(`Expected ')' but found ${tokens[cursor].value}`);
-        throw new CustomErrors_1.CustomError(`Expected ')' but found ${tokens[cursor].value}`);
+        reportError(`')' expect gareko thiyo tara ${tokens[cursor].value} yo bhetiyo.`);
+        throw new CustomErrors_1.CustomError(`')' expect gareko thiyo tara ${tokens[cursor].value} yo bhetiyo.`);
     }
     cursor++;
     if (tokens[cursor].type !== "SEMICOLON") {
-        reportError(`Expected ';' after function call at position ${cursor}`);
-        throw new CustomErrors_1.CustomError(`Expected ';' after function call at position ${cursor}`);
+        reportError(`';' expect gareko thiyo, function call pachhi at position ${cursor}`);
+        throw new CustomErrors_1.CustomError(`';' expect garko thiyo, function call pachhi at position ${cursor}`);
     }
     cursor++;
     const functionCall = {

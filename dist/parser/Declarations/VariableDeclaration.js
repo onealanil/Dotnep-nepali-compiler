@@ -32,7 +32,6 @@ function parseVariableDeclaration(tokens, cursor, declaredVariables, reportError
     }
     if (((_a = peek()) === null || _a === void 0 ? void 0 : _a.type) === "OPERATOR" && peek().value === "=") {
         advance();
-        // Check if the next token indicates a function call
         if (peek().type === "IDENTIFIER" && ((_b = tokens[_cursor + 1]) === null || _b === void 0 ? void 0 : _b.type) === "LeftParen") {
             const functionCallResult = (0, FunctionCall_1.parseFunctionCall)(tokens, _cursor, reportError);
             init = functionCallResult.call;

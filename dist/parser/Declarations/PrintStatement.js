@@ -10,7 +10,6 @@ function parsePrintStatement(tokens, cursor, declaredVariables, reportError) {
     const expressionResult = (0, ExpressionParser_1.parseBinaryExpression)(tokens, cursor);
     const expressionNode = expressionResult.node;
     cursor = expressionResult.cursor;
-    // variable use in the expression
     checkVariables(expressionNode);
     function checkVariables(node) {
         if (node.type === ast_1.ASTNodeType.Identifier) {
@@ -27,10 +26,9 @@ function parsePrintStatement(tokens, cursor, declaredVariables, reportError) {
             if (leftType === null || rightType === null) {
                 return null;
             }
-            // Perform type checks for BinaryExpression
             if (leftType !== rightType) {
                 if ((leftType === "number" && rightType === "string") || (leftType === "string" && rightType === "number")) {
-                    return "string"; // Allow concatenation of string and number
+                    return "string";
                 }
                 else {
                     reportError(`Type mismatch bhayo: '${leftType}' ra '${rightType}' combine garna paedaina!!.`);

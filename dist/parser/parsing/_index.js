@@ -10,7 +10,6 @@ const WhileParser_1 = require("../Declarations/WhileParser");
 const FunctionParser_1 = require("../Declarations/FunctionParser");
 const FunctionCall_1 = require("../Declarations/FunctionCall");
 const CustomErrors_1 = require("../errors/CustomErrors");
-const logger_1 = require("../../logger");
 class Parsing {
     constructor() {
         this._tokens = [];
@@ -24,7 +23,6 @@ class Parsing {
         this._cursor = 0;
         this._errors = [];
         this._declaredVariables.clear();
-        // Reset any other internal state here
     }
     // Initialize the parser with tokens
     initializeParsing(tokens) {
@@ -33,7 +31,6 @@ class Parsing {
         this._cursor = 0;
         this._errors = [];
         this._declaredVariables.clear();
-        (0, logger_1.log)('Parser initialized', { tokensCount: tokens.length });
     }
     // Produce AST
     producedAST() {
@@ -80,7 +77,6 @@ class Parsing {
                 (token.type === "FUNCTION" && token.value === "kaam ra firta")) {
                 const result = (0, FunctionParser_1.parseFunctionDeclaration)(this._tokens, this._cursor, this.reportError.bind(this), this._declaredVariables);
                 this._cursor = result.cursor;
-                (0, logger_1.log)('AST production completed', { programBody: program.body });
                 program.body.push(result.declaration);
             }
             else if (token.type === "EOF") {

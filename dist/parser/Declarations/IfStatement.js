@@ -88,7 +88,7 @@ function parseIfStatement(tokens, cursor, declaredVariables, reportError) {
             advance(); // Skip '('
             const expression = parseExpression();
             if (!match("RightParen")) {
-                throw new CustomErrors_1.CustomError(`Expected ')' but found: ${peek().value}`);
+                throw new CustomErrors_1.CustomError(`')' expect gareko thiyo tara: ${peek().value} yo bhetiyo.`);
             }
             advance(); // Skip ')'
             return expression;
@@ -128,7 +128,7 @@ function parseIfStatement(tokens, cursor, declaredVariables, reportError) {
                 body.push(breakNode);
                 _cursor++; // Move past 'bhayo'
                 if (!match("SEMICOLON")) {
-                    throw new CustomErrors_1.CustomError(`Expected ';' but found: ${peek().value}`);
+                    throw new CustomErrors_1.CustomError(`';' expect gareko thiyo tara: ${peek().value} yo bhetiyo.`);
                 }
                 _cursor++; // Move past ';'
             }
@@ -139,7 +139,7 @@ function parseIfStatement(tokens, cursor, declaredVariables, reportError) {
                 body.push(continueNode);
                 _cursor++; // Move past 'jaari rakh'
                 if (!match("SEMICOLON")) {
-                    throw new CustomErrors_1.CustomError(`Expected ';' but found: ${peek().value}`);
+                    throw new CustomErrors_1.CustomError(`';' expect gareko thiyo tara: ${peek().value} yo bhetiyo.`);
                 }
                 _cursor++; // Move past ';'
             }
@@ -150,7 +150,7 @@ function parseIfStatement(tokens, cursor, declaredVariables, reportError) {
             }
         }
         if (!match("RightBrace")) {
-            throw new CustomErrors_1.CustomError(`Expected '}' but found: ${peek().value}`);
+            throw new CustomErrors_1.CustomError(`'}' expect gareko thiyo tara: ${peek().value} yo bhetiyo.`);
         }
         advance(); // Skip '}'
         return {
@@ -160,16 +160,16 @@ function parseIfStatement(tokens, cursor, declaredVariables, reportError) {
     }
     advance(); // Skip 'yedi'
     if (!match("LeftParen")) {
-        throw new CustomErrors_1.CustomError(`Expected '(' but found: ${peek().value}`);
+        throw new CustomErrors_1.CustomError(`'(' expect gareko thiyo tara: ${peek().value} yo bhetiyo.`);
     }
     advance(); // Skip '('
-    const test = parseExpression(); // Parse the expression, including boolean literals and string comparisons
+    const test = parseExpression();
     if (!match("RightParen")) {
-        throw new CustomErrors_1.CustomError(`Expected ')' but found: ${peek().value}`);
+        throw new CustomErrors_1.CustomError(`')' expect gareko thiyo tara: ${peek().value} yo bhetiyo.`);
     }
     advance(); // Skip ')'
     if (!match("LeftBrace")) {
-        throw new CustomErrors_1.CustomError(`Expected '{' but found: ${peek().value}`);
+        throw new CustomErrors_1.CustomError(`'{' expect gareko thiyo tara: ${peek().value} yo bhetiyo.`);
     }
     advance(); // Skip '{'
     const consequent = parseBlockStatement();
@@ -179,16 +179,16 @@ function parseIfStatement(tokens, cursor, declaredVariables, reportError) {
         while (match("ELSEIF", "navaye")) {
             advance(); // Skip 'navaye'
             if (!match("LeftParen")) {
-                throw new CustomErrors_1.CustomError(`Expected '(' but found: ${peek().value}`);
+                throw new CustomErrors_1.CustomError(`'(' expect gareko thiyo tara: ${peek().value} yo bhetiyo.`);
             }
             advance(); // Skip '('
             const elseIfTest = parseExpression();
             if (!match("RightParen")) {
-                throw new CustomErrors_1.CustomError(`Expected ')' but found: ${peek().value}`);
+                throw new CustomErrors_1.CustomError(`')' expect gareko thiyo tara: ${peek().value} yo bhetiyo.`);
             }
             advance(); // Skip ')'
             if (!match("LeftBrace")) {
-                throw new CustomErrors_1.CustomError(`Expected '{' but found: ${peek().value}`);
+                throw new CustomErrors_1.CustomError(`'{' expect gareko thiyo tara: ${peek().value} yo bhetiyo.`);
             }
             advance(); // Skip '{'
             const elseIfConsequent = parseBlockStatement();
@@ -202,11 +202,10 @@ function parseIfStatement(tokens, cursor, declaredVariables, reportError) {
         if (match("ELSE", "haina bhane")) {
             advance(); // Skip 'haina bhane'
             if (!match("LeftBrace")) {
-                throw new CustomErrors_1.CustomError(`Expected '{' but found: ${peek().value}`);
+                throw new CustomErrors_1.CustomError(`'{' expect gareko thiyo tara: ${peek().value} yo bhetiyo.`);
             }
             advance(); // Skip '{'
             const elseConsequent = parseBlockStatement();
-            // Nest the else statement within the last else if statement
             let lastElseIf = elseIfStatements.pop();
             lastElseIf.alternate = elseConsequent;
             while (elseIfStatements.length > 0) {
@@ -230,7 +229,7 @@ function parseIfStatement(tokens, cursor, declaredVariables, reportError) {
     else if (match("ELSE", "haina bhane")) {
         advance(); // Skip 'haina bhane'
         if (!match("LeftBrace")) {
-            throw new CustomErrors_1.CustomError(`Expected '{' but found: ${peek().value}`);
+            throw new CustomErrors_1.CustomError(` '{' expect gareko thiyo tara: ${peek().value} yo bhetiyo.`);
         }
         advance(); // Skip '{'
         alternate = parseBlockStatement();

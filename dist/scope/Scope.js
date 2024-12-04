@@ -8,7 +8,7 @@ class Scope {
     }
     declare(name, value) {
         if (this.variables.has(name)) {
-            throw new Error(`Variable "${name}" is already declared in this scope.`);
+            throw new Error(`Variable "${name}" agadi nai define gari sakeko chha!`);
         }
         this.variables.set(name, value);
     }
@@ -20,7 +20,7 @@ class Scope {
             this.parentScope.assign(name, value);
         }
         else {
-            throw new Error(`Cannot assign to undeclared variable "${name}".`);
+            throw new Error(`Undeclared variable assign garna mildaina, "${name}".`);
         }
     }
     lookup(name) {
@@ -31,7 +31,7 @@ class Scope {
             return this.parentScope.lookup(name);
         }
         else {
-            throw new Error(`Variable "${name}" is not defined.`);
+            throw new Error(`Variable "${name}" defined gareko chhaina.`);
         }
     }
     child() {

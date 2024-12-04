@@ -20,14 +20,14 @@ function parseFunctionDeclaration(tokens, cursor, reportError, declaredVariables
         returns = false;
     }
     else {
-        reportError(`Expected 'kaam ra firta' or 'kaam' at position ${cursor}`);
-        throw new CustomErrors_1.CustomError(`Expected 'kaam ra firta' or 'kaam' at position ${cursor}`);
+        reportError(`'kaam ra firta' or 'kaam' expect gareko thiyo, at position ${cursor}`);
+        throw new CustomErrors_1.CustomError(`'kaam ra firta' or 'kaam' expect gareko thiyo, at position ${cursor}`);
     }
     cursor++;
     const nameToken = tokens[cursor];
     if (nameToken.type !== "IDENTIFIER") {
-        reportError(`Expected function name at position ${cursor}`);
-        throw new CustomErrors_1.CustomError(`Expected function name at position ${cursor}`);
+        reportError(`Function name expect gareko thiyo, at position ${cursor}`);
+        throw new CustomErrors_1.CustomError(`Function name expect gareko thiyo, at position ${cursor}`);
     }
     const name = {
         type: ast_1.ASTNodeType.Identifier,
@@ -35,15 +35,15 @@ function parseFunctionDeclaration(tokens, cursor, reportError, declaredVariables
     };
     cursor++;
     if (tokens[cursor].type !== "LeftParen") {
-        reportError(`Expected '(' after function name at position ${cursor}`);
-        throw new CustomErrors_1.CustomError(`Expected '(' after function name at position ${cursor}`);
+        reportError(`'(' expect gareko thiyo, function name pachhi at position ${cursor}`);
+        throw new CustomErrors_1.CustomError(`'(' expect gareko thiyo, function name pachhi at position ${cursor}`);
     }
     cursor++;
     const params = [];
     while (tokens[cursor].type !== "RightParen") {
         if (tokens[cursor].type !== "IDENTIFIER") {
-            reportError(`Expected parameter name at position ${cursor}`);
-            throw new CustomErrors_1.CustomError(`Expected parameter name at position ${cursor}`);
+            reportError(`Parameter name expect gareko thiyo, at position ${cursor}`);
+            throw new CustomErrors_1.CustomError(`Parameter name expect gareko thiyo, at position ${cursor}`);
         }
         params.push({
             type: ast_1.ASTNodeType.Identifier,
@@ -59,14 +59,14 @@ function parseFunctionDeclaration(tokens, cursor, reportError, declaredVariables
             cursor++;
         }
         else if (tokens[cursor].type !== "RightParen") {
-            reportError(`Expected ',' or ')' at position ${cursor}`);
-            throw new CustomErrors_1.CustomError(`Expected ',' or ')' at position ${cursor}`);
+            reportError(`',' athaba ')' expect gareko thiyo at position ${cursor}`);
+            throw new CustomErrors_1.CustomError(` ',' athaba ')' gareko thiyo at position ${cursor}`);
         }
     }
     cursor++;
     if (tokens[cursor].type !== "LeftBrace") {
-        reportError(`Expected '{' after function parameters at position ${cursor}`);
-        throw new CustomErrors_1.CustomError(`Expected '{' after function parameters at position ${cursor}`);
+        reportError(`'{' expect gareko thiyo function parameters pacchi, at position ${cursor}`);
+        throw new CustomErrors_1.CustomError(`'{' expect gareko thiyo function parameters pachhi, at position ${cursor}`);
     }
     cursor++;
     const bodyResult = parseBlockStatement(tokens, cursor, reportError, declaredVariables);
@@ -80,15 +80,15 @@ function parseFunctionDeclaration(tokens, cursor, reportError, declaredVariables
             }
         }
         if (!hasReturnStatement) {
-            reportError(`Function '${name.name}' requires 'kaam ra firta' declaration but lacks 'firta' statement.`);
-            throw new CustomErrors_1.CustomError(`Function '${name.name}' requires 'kaam ra firta' declaration but lacks 'firta' statement.`);
+            reportError(`Function '${name.name}' requires 'kaam ra firta' declaration tara 'firta' statement ko kami bhayo.`);
+            throw new CustomErrors_1.CustomError(`Function '${name.name}' requires 'kaam ra firta' declaration tara 'firta' statement ko kami bhayo.`);
         }
     }
     else {
         for (const statement of bodyResult.block.body) {
             if (statement.type === ast_1.ASTNodeType.ReturnStatement) {
-                reportError(`Function '${name.name}' is declared with 'kaam' and should not have 'firta' statement.`);
-                throw new CustomErrors_1.CustomError(`Function '${name.name}' is declared with 'kaam' and should not have 'firta' statement.`);
+                reportError(`Function '${name.name}' is declared with 'kaam' teibhayera 'firta' statement ko jarurat chhaina.`);
+                throw new CustomErrors_1.CustomError(`Function '${name.name}' is declared with 'kaam' teibhayera 'firta' statement ko jarurat chhaina.`);
             }
         }
     }
@@ -105,8 +105,8 @@ exports.parseFunctionDeclaration = parseFunctionDeclaration;
 function parseReturnStatement(tokens, cursor, reportError) {
     const returnToken = tokens[cursor];
     if (returnToken.type !== "RETURN" || returnToken.value !== "firta") {
-        reportError(`Expected 'firta' at position ${cursor}`);
-        throw new CustomErrors_1.CustomError(`Expected 'firta' at position ${cursor}`);
+        reportError(`'firta' expect gareko thiyo, at position ${cursor}`);
+        throw new CustomErrors_1.CustomError(`'firta' expect gareko thiyo, at position ${cursor}`);
     }
     cursor++;
     const result = (0, ExpressionParser_1.parseBinaryExpression)(tokens, cursor);
@@ -116,8 +116,8 @@ function parseReturnStatement(tokens, cursor, reportError) {
         argument: result.node
     };
     if (tokens[cursor].type !== "SEMICOLON") {
-        reportError(`Expected ';' after 'firta', found '${tokens[cursor].value}' instead.`);
-        throw new CustomErrors_1.CustomError(`Expected ';' after 'firta', found '${tokens[cursor].value}' instead.`);
+        reportError(`';' expect garko thiyo 'firta' pachhi, tara '${tokens[cursor].value}' vetiyo.`);
+        throw new CustomErrors_1.CustomError(`';' expect gareko thiyo 'firta' pachhi, tara '${tokens[cursor].value}' vetiyo.`);
     }
     cursor++;
     return { statement: returnStatement, cursor };
@@ -157,8 +157,8 @@ function parseStatement(tokens, cursor, declaredVariables, reportError) {
                 return { statement: result.variable, cursor: result.cursor };
             }
             else {
-                reportError(`Variable '${identifier}' is not declared.`);
-                throw new CustomErrors_1.CustomError(`Variable '${identifier}' is not declared.`);
+                reportError(`Variable '${identifier}' declared gareko chhaina.`);
+                throw new CustomErrors_1.CustomError(`Variable '${identifier}' declared gareko chhaina.`);
             }
         }
     }
@@ -191,8 +191,8 @@ function parseStatement(tokens, cursor, declaredVariables, reportError) {
 function parseGlobalVariable(tokens, cursor, globalVariables, reportError) {
     const variableName = tokens[cursor].value;
     if (globalVariables.has(variableName)) {
-        reportError(`Variable '${variableName}' is already declared as a global variable.`);
-        throw new CustomErrors_1.CustomError(`Variable '${variableName}' is already declared as a global variable.`);
+        reportError(`Variable '${variableName}' agaadinai global variable ma declared garisakeko chha.`);
+        throw new CustomErrors_1.CustomError(`Variable '${variableName}' agaadinai global variable ma declared garisakeko chha.`);
     }
     const result = (0, VariableDeclaration_1.parseVariableDeclaration)(tokens, cursor, globalVariables, reportError);
     return { variable: result.declaration, cursor: result.cursor };

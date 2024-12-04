@@ -21,7 +21,7 @@ class Environment {
             this.parent.assign(name, value);
         }
         else {
-            throw new Error(`Variable '${name}' is not defined.`);
+            throw new Error(`Variable '${name}' defined bhako chhaina.`);
         }
     }
     lookup(name) {
@@ -32,7 +32,7 @@ class Environment {
             return this.parent.lookup(name);
         }
         else {
-            throw new Error(`Variable '${name}' is not defined.`);
+            throw new Error(`Variable '${name}' defined bhako chhaina.`);
         }
     }
     addOutput(output) {
@@ -46,13 +46,11 @@ function resetGlobalEnvironment() {
 }
 exports.resetGlobalEnvironment = resetGlobalEnvironment;
 function eval_program(program) {
-    console.log("Resetting global environment");
-    const globalEnv = new Environment(); // Ensure a new instance is created for each run
+    const globalEnv = new Environment();
     let lastEvaluated = { type: "null", value: null };
     for (const statement of program.body) {
         lastEvaluated = evaluate(statement, globalEnv);
     }
-    console.log("Global environment after evaluation:", globalEnv);
     return { results: lastEvaluated, outputs: globalEnv.outputs };
 }
 exports.eval_program = eval_program;
@@ -82,14 +80,14 @@ function eval_binary_expr(node, env) {
                     return { type: "number", value: left.value / right.value };
                 }
                 else {
-                    throw new Error("Division by zero is not allowed.");
+                    throw new Error("Zero dekhi division garna manaai chha!.");
                 }
             case "%":
                 if (right.value !== 0) {
                     return { type: "number", value: left.value % right.value };
                 }
                 else {
-                    throw new Error("Division by zero is not allowed.");
+                    throw new Error("Zero dekhi division garna manaai chha!.");
                 }
             case "<":
                 return { type: "boolean", value: left.value < right.value };
@@ -118,7 +116,7 @@ function eval_binary_expr(node, env) {
         }
     }
     else {
-        throw new Error("Operands must be numbers or strings.");
+        throw new Error("Operands chai ki numbers athaba strings hunu parchha.");
     }
 }
 function eval_identifier(node, env) {
@@ -140,7 +138,7 @@ function eval_print(node, env) {
         result = value.value.toString();
     }
     else {
-        throw new Error(`Unsupported value type for print: ${value.type}`);
+        throw new Error(`Unsupported value type print ko laagi: ${value.type}`);
     }
     env.addOutput(result);
     return value;
@@ -148,7 +146,7 @@ function eval_print(node, env) {
 function eval_increment(node, env) {
     const variable = env.lookup(node.identifier.name);
     if (variable.type !== "number") {
-        throw new Error(`Variable '${node.identifier.name}' is not a number.`);
+        throw new Error(`Variable '${node.identifier.name}' number haina!.`);
     }
     const newValue = { type: "number", value: variable.value + 1 };
     env.assign(node.identifier.name, newValue);
@@ -157,7 +155,7 @@ function eval_increment(node, env) {
 function eval_if_statement(node, env) {
     const test = evaluate(node.test, env);
     if (test.type !== "boolean") {
-        throw new Error("If statement test expression must be a boolean.");
+        throw new Error("If statement test expression boolean hunai parchha!");
     }
     if (test.value) {
         return eval_block_statement(node.consequent, env);
@@ -184,7 +182,7 @@ function eval_while_statement(node, env) {
     while (true) {
         const testResult = evaluate(node.test, env);
         if (testResult.type !== "boolean") {
-            throw new Error("While statement test expression must be a boolean.");
+            throw new Error("While statement test expression boolean hunai parchha!");
         }
         if (!testResult.value) {
             break;
@@ -229,7 +227,7 @@ function eval_return_statement(node, env) {
 function eval_function_call(node, env) {
     const func = env.lookup(node.callee.name);
     if (func.type !== "function") {
-        throw new Error(`${node.callee.name} is not a function.`);
+        throw new Error(`${node.callee.name} chai function haina!.`);
     }
     const functionEnv = new Environment(func.value.env);
     for (let i = 0; i < func.value.params.length; i++) {

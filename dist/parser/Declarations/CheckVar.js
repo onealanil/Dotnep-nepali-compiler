@@ -13,7 +13,6 @@ function checkVariablesInExpression(expression, declaredVariables, reportError) 
             lastType = varInfo.type;
         }
         else if (/^[a-zA-Z]/.test(variable)) {
-            // It's a string literal, no type checking needed
             lastType = "string";
         }
         else if (!isNaN(Number(variable))) {

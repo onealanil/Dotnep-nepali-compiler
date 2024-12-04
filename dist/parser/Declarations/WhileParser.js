@@ -11,17 +11,16 @@ const ExpressionParser_1 = require("./ExpressionParser");
 function parseWhileStatement(tokens, cursor, declaredVariables, reportError) {
     let current = cursor;
     if (tokens[current].type !== "WHILE" || tokens[current].value !== "jaba samma") {
-        reportError(`Expected 'jaba samma' but found ${tokens[current].value}`);
-        throw new CustomErrors_1.CustomError(`Parsing failed: Expected 'jaba samma' but found ${tokens[current].value}`);
+        reportError(`Expected 'jaba samma' tara ${tokens[current].value} yo bhetiyo.`);
+        throw new CustomErrors_1.CustomError(`Parsing failed: Expected 'jaba samma' tara ${tokens[current].value} yo bhetiyo.`);
     }
     current++;
     // Check for '('
     if (tokens[current].type !== "LeftParen") {
-        reportError(`Expected '(' but found ${tokens[current].value}`);
-        throw new CustomErrors_1.CustomError(`Parsing failed: Expected '(' but found ${tokens[current].value}`);
+        reportError(`Expected '(' tara ${tokens[current].value} yo bhetiyo.`);
+        throw new CustomErrors_1.CustomError(`Parsing failed: Expected '(' tara ${tokens[current].value} yo bhetiyo.`);
     }
     current++; // Move past '('
-    // Parse the condition expression
     let condition;
     if (tokens[current].type === "BOOLEAN") {
         condition = {
@@ -41,14 +40,12 @@ function parseWhileStatement(tokens, cursor, declaredVariables, reportError) {
     // current = condition.cursor;
     // Check for ')'
     if (tokens[current].type !== "RightParen") {
-        reportError(`Expected ')' but found ${tokens[current].value}`);
-        throw new CustomErrors_1.CustomError(`Parsing failed: Expected ')' but found ${tokens[current].value}`);
+        reportError(`Expected ')' tara ${tokens[current].value} yo bhetiyo.`);
+        throw new CustomErrors_1.CustomError(`Parsing failed: Expected ')' tara ${tokens[current].value} yo bhetiyo.`);
     }
     current++; // Move past ')'
-    // Parse the body of the while loop
     const body = parseWhileLoopBody(tokens, current, declaredVariables, reportError);
     current = body.cursor;
-    // Create the WhileStatementNode
     const whileStatement = {
         type: ast_1.ASTNodeType.WhileStatement,
         test: condition.node,
@@ -62,8 +59,8 @@ function parseWhileLoopBody(tokens, cursor, declaredVariables, reportError) {
     const blockBody = [];
     // Check for '{'
     if (tokens[current].type !== "LeftBrace") {
-        reportError(`Expected '{' but found ${tokens[current].value}`);
-        throw new CustomErrors_1.CustomError(`Parsing failed: Expected '{' but found ${tokens[current].value}`);
+        reportError(`Expected '{' tara ${tokens[current].value} yo bhetiyo.`);
+        throw new CustomErrors_1.CustomError(`Parsing failed: Expected '{' tara ${tokens[current].value} yo bhetiyo.`);
     }
     current++; // Move past '{'
     while (tokens[current].type !== "RightBrace" && current < tokens.length) {
@@ -76,8 +73,8 @@ function parseWhileLoopBody(tokens, cursor, declaredVariables, reportError) {
                     current = newCursor;
                 }
                 else {
-                    reportError(`Unexpected keyword '${token.value}' at position ${current}`);
-                    throw new CustomErrors_1.CustomError(`Parsing failed: Unexpected keyword '${token.value}' at position ${current}`);
+                    reportError(`Unexpected keyword bhetiyo '${token.value}' at position ${current}`);
+                    throw new CustomErrors_1.CustomError(`Parsing failed: Unexpected keyword bhetiyo '${token.value}' at position ${current}`);
                 }
                 break;
             }
@@ -88,8 +85,8 @@ function parseWhileLoopBody(tokens, cursor, declaredVariables, reportError) {
                     current = newCursor;
                 }
                 else {
-                    reportError(`Unexpected keyword '${token.value}' at position ${current}`);
-                    throw new CustomErrors_1.CustomError(`Parsing failed: Unexpected keyword '${token.value}' at position ${current}`);
+                    reportError(`Unexpected keyword bhetiyo '${token.value}' at position ${current}`);
+                    throw new CustomErrors_1.CustomError(`Parsing failed: Unexpected keyword bhetiyo '${token.value}' at position ${current}`);
                 }
                 break;
             }
@@ -103,8 +100,8 @@ function parseWhileLoopBody(tokens, cursor, declaredVariables, reportError) {
                     current = newCursor;
                 }
                 else {
-                    reportError(`Unexpected identifier '${token.value}' at position ${current}`);
-                    throw new CustomErrors_1.CustomError(`Parsing failed: Unexpected identifier '${token.value}' at position ${current}`);
+                    reportError(`Unexpected identifier bhetiyo '${token.value}' at position ${current}`);
+                    throw new CustomErrors_1.CustomError(`Parsing failed: Unexpected identifier bhetiyo '${token.value}' at position ${current}`);
                 }
                 break;
             }
@@ -129,8 +126,8 @@ function parseWhileLoopBody(tokens, cursor, declaredVariables, reportError) {
                     current++; // Move past 'bhayo'
                 }
                 else {
-                    reportError(`Unexpected keyword '${token.value}' at position ${current}`);
-                    throw new CustomErrors_1.CustomError(`Parsing failed: Unexpected keyword '${token.value}' at position ${current}`);
+                    reportError(`Unexpected keyword bhetiyo '${token.value}' at position ${current}`);
+                    throw new CustomErrors_1.CustomError(`Parsing failed: Unexpected keyword bhetiyo '${token.value}' at position ${current}`);
                 }
                 break;
             }
@@ -143,14 +140,14 @@ function parseWhileLoopBody(tokens, cursor, declaredVariables, reportError) {
                     current++; // Move past 'jaari rakh'
                 }
                 else {
-                    reportError(`Unexpected keyword '${token.value}' at position ${current}`);
-                    throw new CustomErrors_1.CustomError(`Parsing failed: Unexpected keyword '${token.value}' at position ${current}`);
+                    reportError(`Unexpected keyword bhetiyo '${token.value}' at position ${current}`);
+                    throw new CustomErrors_1.CustomError(`Parsing failed: Unexpected keyword bhetiyo '${token.value}' at position ${current}`);
                 }
                 break;
             }
             default: {
-                reportError(`Unexpected token '${token.value}' at position ${current}`);
-                throw new CustomErrors_1.CustomError(`Parsing failed: Unexpected token '${token.value}' at position ${current}`);
+                reportError(`Unexpected token bhetiyo '${token.value}' at position ${current}`);
+                throw new CustomErrors_1.CustomError(`Parsing failed: Unexpected token bhetiyo'${token.value}' at position ${current}`);
             }
         }
         if (tokens[current].type === "SEMICOLON") {
@@ -159,8 +156,8 @@ function parseWhileLoopBody(tokens, cursor, declaredVariables, reportError) {
     }
     // Check for '}'
     if (tokens[current].type !== "RightBrace") {
-        reportError(`Expected '}' but found ${tokens[current].value}`);
-        throw new CustomErrors_1.CustomError(`Parsing failed: Expected '}' but found ${tokens[current].value}`);
+        reportError(`Expected '}' tara ${tokens[current].value} yo bhetiyo.`);
+        throw new CustomErrors_1.CustomError(`Parsing failed: Expected '}' tara ${tokens[current].value} yo bhetiyo.`);
     }
     current++; // Move past '}'
     const blockStatement = {

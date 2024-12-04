@@ -6,9 +6,9 @@ function parseAssignmentStatement(tokens, cursor, declaredVariables, reportError
     let _cursor = cursor;
     const advance = () => tokens[_cursor++];
     const peek = () => tokens[_cursor];
-    const identifierToken = advance(); // variable name token
+    const identifierToken = advance();
     if (identifierToken.type !== "IDENTIFIER") {
-        reportError(`Identifier expected for assignment, but found ${identifierToken.type}`);
+        reportError(`Identifier expect gareko thiyo assignment ma tara, ${identifierToken.type} yo bhetiyo`);
     }
     const identifier = {
         type: ast_1.ASTNodeType.Identifier,
@@ -26,14 +26,13 @@ function parseAssignmentStatement(tokens, cursor, declaredVariables, reportError
             advance(); // skip ';'
         }
         else {
-            reportError(`Expected ';' after assignment, but found ${peek().type}`);
+            reportError(`';' yo expect gareko thiyo tara ${peek().type} yo bhetiyo`);
         }
         const assignment = {
             type: ast_1.ASTNodeType.Assignment,
             identifier,
             value,
         };
-        // Update the declared variables map
         const varInfo = declaredVariables.get(identifier.name);
         if (varInfo) {
             varInfo.value = value;
@@ -46,13 +45,12 @@ function parseAssignmentStatement(tokens, cursor, declaredVariables, reportError
             advance(); // skip ';'
         }
         else {
-            reportError(`Expected ';' after increment, but found ${peek().type}`);
+            reportError(`';' expect gareko thiyo tara ${peek().type} yo bhetiyo`);
         }
         const increment = {
             type: ast_1.ASTNodeType.Increment,
             identifier,
         };
-        // Update the declared variables map for increment
         const varInfo = declaredVariables.get(identifier.name);
         if (varInfo && varInfo.value && varInfo.value.type === ast_1.ASTNodeType.NumericLiteral) {
             varInfo.value = { type: ast_1.ASTNodeType.NumericLiteral, value: varInfo.value.value + 1 };
@@ -60,7 +58,7 @@ function parseAssignmentStatement(tokens, cursor, declaredVariables, reportError
         return { assignment: increment, cursor: _cursor };
     }
     else {
-        reportError(`Expected '=' or '++' in assignment, but found ${peek().type}`);
+        reportError(`'=' athaba'++' expect gareko thiyo assignment ma tara ${peek().type} yo bhetiyo`);
     }
     const assignment = {
         type: ast_1.ASTNodeType.Assignment,
@@ -124,6 +122,6 @@ function parsePrimary(tokens, cursor, declaredVariables, reportError) {
             cursor
         };
     }
-    reportError(`Unexpected token in expression: ${token.type}`);
+    reportError(`Unexpected token bhetiyo: ${token.type}`);
     return { node: { type: ast_1.ASTNodeType.NullType, value: null }, cursor };
 }

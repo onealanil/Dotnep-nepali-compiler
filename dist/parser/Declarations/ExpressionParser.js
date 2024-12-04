@@ -5,7 +5,6 @@ const ast_1 = require("../AST/ast");
 const TokenType_1 = require("../../lexer/token_type/TokenType");
 function parseBinaryExpression(tokens, cursor) {
     let leftNode;
-    // Helper function to parse a primary expression (number, identifier, string, or nested expression)
     function parsePrimary() {
         const token = tokens[cursor];
         if (token.type === TokenType_1.TokenType.NUMBER) {
@@ -59,14 +58,13 @@ function parseBinaryExpression(tokens, cursor) {
                 };
             }
             else {
-                throw new Error(`Expected closing parenthesis, but found ${tokens[expression.cursor].value}`);
+                throw new Error(`Closing parenthesis, expect gareko thiyo tara ${tokens[expression.cursor].value}, yo bhetiyo`);
             }
         }
         else {
             throw new Error(`Unexpected token: ${token.type}`);
         }
     }
-    // Parse the left operand
     ({ node: leftNode, cursor } = parsePrimary());
     while (cursor < tokens.length && (tokens[cursor].type === TokenType_1.TokenType.OPERATOR && ["+", "-", "*", "/", "%", "<", ">", "<=", ">=", "==", "!="].includes(tokens[cursor].value))) {
         const operator = tokens[cursor].value;

@@ -1,6 +1,6 @@
 {
   "name": "nepali-compiler",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A Nepali language compiler",
   "main": "dist/index.js",
   "bin": {

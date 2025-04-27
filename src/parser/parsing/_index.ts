@@ -1,3 +1,11 @@
+/**
+ * @file _index.ts (parser)
+ * @description This file contains the Parsing class which is responsible for parsing a list of tokens into an Abstract Syntax Tree (AST).
+ * It handles various statements such as variable declarations, print statements, assignment statements, if statements, while statements, and function declarations.
+ * It also manages errors during parsing and keeps track of declared variables.
+ * @includes Token, ASTNodeType, ProgramNode
+ * @exports Parsing
+ */
 import { Token } from "../../lexer/token_type/Token";
 import { ASTNodeType, ProgramNode } from "../AST/ast";
 import { parseAssignmentStatement } from "../Declarations/AssignmentOperator";
@@ -10,6 +18,29 @@ import { parseFunctionCall } from "../Declarations/FunctionCall";
 import { CustomError } from "../errors/CustomErrors";
 import { variableInfo } from "../helper/Interfaces";
 
+/**
+ * @class Parsing
+ * @description The Parsing class is responsible for parsing a list of tokens into an Abstract Syntax Tree (AST).
+ * It handles various statements such as variable declarations, print statements, assignment statements, if statements, while statements, and function declarations.
+ * It also manages errors during parsing and keeps track of declared variables.
+ * @constructor
+ * @param {Token[]} tokens - The list of tokens to be parsed.
+ * @throws {CustomError} - If parsing fails due to errors in the token stream.
+ * @requires parseAssignmentStatement, parseIfStatement, parsePrintStatement, parseVariableDeclaration, parseWhileStatement, parseFunctionDeclaration, parseFunctionCall
+ * @requires CustomError
+ * @requires variableInfo
+ * @requires Interfaces
+ * @requires AST
+ * @requires Declarations
+ * @requires TokenType
+ * @requires keywords
+ * @requires exceptions
+ * @requires helper
+ * @requires lexer
+ * @requires errorHandling
+ * @requires logging
+ * @exports Parsing
+ */
 export class Parsing {
     private _tokens: Token[] = [];
     private _cursor: number = 0;
@@ -25,7 +56,7 @@ export class Parsing {
         this._cursor = 0;
         this._errors = [];
         this._declaredVariables.clear();
-      }
+    }
 
     // Initialize the parser with tokens
     initializeParsing(tokens: Token[]): void {
@@ -102,7 +133,7 @@ export class Parsing {
                 this._cursor = result.cursor;
                 program.body.push(result.whileStatement);
             } else if ((token.type === "FUNCTION" && token.value === "kaam") ||
-                       (token.type === "FUNCTION" && token.value === "kaam ra firta")) {
+                (token.type === "FUNCTION" && token.value === "kaam ra firta")) {
                 const result = parseFunctionDeclaration(
                     this._tokens,
                     this._cursor,
@@ -126,10 +157,10 @@ export class Parsing {
 
         return program;
     }
-    
+
     resetDeclaredVariables() {
         this._declaredVariables.clear();
-      }
+    }
 
     isAtEnd(): boolean {
         return this._cursor >= this._tokens.length;

@@ -1,3 +1,9 @@
+/**
+ * @file values.ts
+ * @description This file contains the interfaces and types for runtime values in the interpreter.
+ * @includes RuntimeVal, NullVal, NumberVal, StringVal, BoolVal, FunctionVal
+ * @exports RuntimeVal, NullVal, NumberVal, StringVal, BoolVal, FunctionVal
+ */
 import { BlockStatementNode } from "../../parser/AST/ast";
 
 export type ValueType = "null" | "number" | "string" | "boolean" | "function";

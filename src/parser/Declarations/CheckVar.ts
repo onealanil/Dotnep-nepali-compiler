@@ -1,5 +1,18 @@
+/**
+ * @file CheckVar.ts
+ * @description This file contains the function to check the types of variables in an expression.
+ * @includes checkVariablesInExpression
+ * @exports checkVariablesInExpression
+ */
 import { variableInfo, VariableType } from "../helper/Interfaces";
 
+/**
+ * @function checkVariablesInExpression
+ * @param expression - The expression to check for variable types.
+ * @param declaredVariables - A map of declared variables for scope resolution.
+ * @param reportError - A function to report errors during parsing.
+ * @returns {VariableType | null} - The type of the last variable or null if none.
+ */
 export function checkVariablesInExpression(
     expression: string,
     declaredVariables: Map<string, variableInfo>,

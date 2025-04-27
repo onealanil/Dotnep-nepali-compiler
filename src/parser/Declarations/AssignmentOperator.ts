@@ -1,7 +1,22 @@
+/**
+ * @file AssignmentOperator.ts
+ * @description This file contains the function to parse assignment statements in the language.
+ * @includes parseAssignmentStatement, parseExpression, parsePrimary
+ * @exports parseAssignmentStatement
+ */
 import { Token } from "../../lexer/token_type/Token";
 import { ASTNode, ASTNodeType, IdentifierNode, AssignmentNode, NumericLiteralNode, IncrementNode } from "../AST/ast";
 import { variableInfo } from "../helper/Interfaces";
 
+/**
+ * @function parseAssignmentStatement
+ * @description Parses an assignment statement or increment statement from the list of tokens.
+ * @param tokens - The list of tokens to be parsed.
+ * @param cursor - The current position in the list of tokens.
+ * @param declaredVariables - A map of declared variables for scope resolution.
+ * @param reportError - A function to report errors during parsing.
+ * @returns An object containing the parsed assignment or increment node and the updated cursor position.
+ */
 export function parseAssignmentStatement(
     tokens: Token[],
     cursor: number,
@@ -85,6 +100,16 @@ export function parseAssignmentStatement(
     return { assignment, cursor: _cursor };
 }
 
+/**
+ * @function parseExpression
+ * @param tokens - The list of tokens to be parsed.
+ * @param cursor - The current position in the list of tokens.
+ * @param declaredVariables - A map of declared variables for scope resolution.
+ * @param reportError - A function to report errors during parsing.
+ * @description Parses an expression from the list of tokens.
+ * @throws {Error} - If an unexpected token is encountered.
+ * @returns {Object} - An object containing the parsed node and the updated cursor position.
+ */
 function parseExpression(tokens: Token[], cursor: number, declaredVariables: Map<string, variableInfo>, reportError: (message: string) => void): { node: ASTNode, cursor: number } {
     let _cursor = cursor;
     const advance = () => tokens[_cursor++];
@@ -112,6 +137,16 @@ function parseExpression(tokens: Token[], cursor: number, declaredVariables: Map
     return left;
 }
 
+/**
+ * @function parsePrimary
+ * @param tokens - The list of tokens to be parsed.
+ * @param cursor - The current position in the list of tokens.
+ * @param declaredVariables - A map of declared variables for scope resolution.
+ * @param reportError - A function to report errors during parsing.
+ * @returns {Object} - An object containing the parsed node and the updated cursor position.
+ * @description Parses a primary expression from the list of tokens.
+ * @throws {Error} - If an unexpected token is encountered.
+ */
 function parsePrimary(tokens: Token[], cursor: number, declaredVariables: Map<string, variableInfo>, reportError: (message: string) => void): { node: ASTNode, cursor: number } {
     const token = tokens[cursor++];
 

@@ -1,9 +1,29 @@
+/**
+ * @file VariableDeclaration.ts
+ * @description This file contains the function to parse variable declaration statements in the language.
+ * @includes parseVariableDeclaration
+ * @exports parseVariableDeclaration
+ * @exports parseExpression
+ */
 import { Token } from "../../lexer/token_type/Token";
 import { ASTNode, ASTNodeType, IdentifierNode, VariableDeclarationNode, BooleanLiteralNode } from "../AST/ast";
 import { VariableType, variableInfo } from "../helper/Interfaces";
 import { parseBinaryExpression } from "./ExpressionParser";
 import { parseFunctionCall } from "../Declarations/FunctionCall";
 
+/**
+ * @function parseVariableDeclaration
+ * @param tokens - The list of tokens to be parsed.
+ * @param cursor - The current position in the list of tokens.
+ * @param declaredVariables - A map of declared variables for scope resolution.
+ * @param reportError - A function to report errors during parsing.
+ * @description This function parses a variable declaration from the list of tokens.
+ * It expects the 'rakh' keyword followed by an identifier.
+ * It also checks for an optional assignment operator '=' and an expression.
+ * It also checks for a semicolon ';' at the end of the statement.
+ * If any of these conditions are not met, an error is reported.
+ * @returns { declaration: VariableDeclarationNode; cursor: number } - The parsed variable declaration and the updated cursor position.
+ */
 export function parseVariableDeclaration(
     tokens: Token[],
     cursor: number,
@@ -71,6 +91,15 @@ export function parseVariableDeclaration(
 
     return { declaration, cursor: _cursor };
 
+    /**
+     * @function checkExpressionType
+     * @param node - The AST node to check for variable types.
+     * @returns {VariableType | undefined} - The type of the variable or undefined if undeclared.
+     * @description This function checks the types of variables in the expression.
+     * It verifies if the variables are declared and checks for type mismatches.
+     * If a variable is undeclared, an error is reported.
+     * If a type mismatch occurs, an error is reported.
+     */
     function checkExpressionType(node: ASTNode): VariableType | undefined {
         if (node.type === ASTNodeType.Identifier) {
             const varInfo = declaredVariables.get(node.name);
@@ -99,6 +128,17 @@ export function parseVariableDeclaration(
     }
 }
 
+/**
+ * @function parseExpression
+ * @param tokens - The list of tokens to be parsed.
+ * @param cursor - The current position in the list of tokens.
+ * @description This function parses an expression from the list of tokens.
+ * It expects a boolean literal, binary expression, or a function call.
+ * It also checks for an optional assignment operator '=' and an expression.
+ * If any of these conditions are not met, an error is reported.
+ * @throws {Error} - If an unexpected token is encountered.
+ * @returns { node: ASTNode, cursor: number } - The parsed AST node and the updated cursor position.
+ */
 function parseExpression(tokens: Token[], cursor: number): { node: ASTNode, cursor: number } {
     const token = tokens[cursor];
     if (token.type === "BOOLEAN") {

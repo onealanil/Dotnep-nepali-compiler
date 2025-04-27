@@ -1,3 +1,9 @@
+/**
+ * @file FunctionParser.ts
+ * @description This file contains the function to parse function declarations in the language.
+ * @includes parseFunctionDeclaration, parseBlockStatement, parseReturnStatement
+ * @exports parseFunctionDeclaration, parseReturnStatement
+ */
 import { Token } from "../../lexer/token_type/Token";
 import { ASTNodeType, FunctionDeclarationNode, BlockStatementNode, IdentifierNode } from "../AST/ast";
 import { CustomError } from "../errors/CustomErrors";
@@ -12,6 +18,20 @@ import { parseWhileStatement } from "./WhileParser";
 
 const globalVariables: Map<string, VariableInfo> = new Map();
 
+/**
+ * @function parseFunctionDeclaration
+ * @param tokens - The list of tokens to be parsed.
+ * @param cursor - The current position in the list of tokens.
+ * @param reportError - A function to report errors during parsing.
+ * @param declaredVariables - A map of declared variables for scope resolution.
+ * @description This function parses a function declaration from the list of tokens.
+ * It expects the function declaration to start with 'kaam ra firta' or 'kaam',
+ * followed by the function name, parameters in parentheses, and a block of statements in braces.
+ * It also checks for a return statement if the function is declared with 'kaam ra firta'.
+ * If any of these conditions are not met, an error is reported.
+ * @returns { declaration: FunctionDeclarationNode, cursor: number } - The parsed function declaration node and the updated cursor position.
+ * @throw {CustomError} - Throws an error if the function declaration is not valid.
+ */
 export function parseFunctionDeclaration(
     tokens: Token[],
     cursor: number,
@@ -114,6 +134,19 @@ export function parseFunctionDeclaration(
     return { declaration: functionDeclaration, cursor };
 }
 
+/**
+ * @function parseReturnStatement
+ * @param tokens - The list of tokens to be parsed.
+ * @param cursor - The current position in the list of tokens.
+ * @param reportError - A function to report errors during parsing.
+ * @description This function parses a return statement from the list of tokens.
+ * It expects the return statement to start with 'firta',
+ * followed by an expression and a semicolon.
+ * If any of these conditions are not met, an error is reported.
+ * @returns { statement: ReturnStatementNode, cursor: number } - The parsed return statement node and the updated cursor position.
+ * @throws {CustomError} - Throws an error if the return statement is not valid.
+ * @throws {Error} - Throws an error if the return statement is not valid.
+ */
 export function parseReturnStatement(
     tokens: Token[],
     cursor: number,
@@ -143,6 +176,18 @@ export function parseReturnStatement(
     return { statement: returnStatement, cursor };
 }
 
+/**
+ * @function parseBlockStatement
+ * @param tokens - The list of tokens to be parsed.
+ * @param cursor - The current position in the list of tokens.
+ * @param reportError - A function to report errors during parsing.
+ * @param declaredVariables - A map of declared variables for scope resolution.
+ * @description This function parses a block statement from the list of tokens.
+ * It expects the block statement to start with '{' and end with '}'.
+ * It parses the statements inside the block and returns them as an array.
+ * If any of these conditions are not met, an error is reported.
+ * @returns { block: BlockStatementNode, cursor: number } - The parsed block statement and the updated cursor position.
+ */
 function parseBlockStatement(
     tokens: Token[],
     cursor: number,
@@ -164,6 +209,19 @@ function parseBlockStatement(
     return { block, cursor };
 }
 
+/**
+ * @function parseStatement
+ * @param tokens - The list of tokens to be parsed.
+ * @param cursor - The current position in the list of tokens.
+ * @param declaredVariables - A map of declared variables for scope resolution.
+ * @param reportError - A function to report errors during parsing.
+ * @description This function parses a statement from the list of tokens.
+ * It checks the type of the token and calls the appropriate parsing function.
+ * It handles variable declarations, assignments, function calls, print statements,
+ * if statements, while statements, and return statements.
+ * If any of these conditions are not met, an error is reported.
+ * @returns { statement: any, cursor: number } - The parsed statement and the updated cursor position.
+ */
 function parseStatement(
     tokens: Token[],
     cursor: number,
@@ -215,6 +273,21 @@ function parseStatement(
     throw new CustomError(`Unexpected statement type: ${token.type} at position ${cursor}`);
 }
 
+/**
+ * @function parseGlobalVariable
+ * @param tokens - tokens to be parsed.
+ * @param cursor - current position in the list of tokens.
+ * @param globalVariables - a map of global variables.
+ * @param reportError - a function to report errors during parsing.
+ * @description This function parses a global variable declaration from the list of tokens.
+ * It checks if the variable is already declared in the global scope.
+ * If it is, an error is reported.
+ * It then calls the parseVariableDeclaration function to parse the variable declaration.
+ * If any of these conditions are not met, an error is reported.
+ * @returns { variable: any, cursor: number } - The parsed variable and the updated cursor position.
+ * @throws {CustomError} - Throws an error if the variable is already declared in the global scope.
+ * @throws {Error} - Throws an error if the variable is already declared in the global scope.
+ */
 function parseGlobalVariable(
     tokens: Token[],
     cursor: number,

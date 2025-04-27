@@ -1,7 +1,19 @@
+/**
+ * @file ExpressionParser.ts
+ * @description This file contains the function to parse binary expressions in the language.
+ * @includes parseBinaryExpression
+ * @exports parseBinaryExpression
+ */
 import { Token } from "../../lexer/token_type/Token";
 import { ASTNode, ASTNodeType, BinaryExpressionNode, NumericLiteralNode, IdentifierNode, StringNode, BooleanLiteralNode } from "../AST/ast";
 import { TokenType } from "../../lexer/token_type/TokenType";
 
+/**
+ * @function parseBinaryExpression
+ * @param tokens - The list of tokens to be parsed.
+ * @param cursor - The current position in the token list.
+ * @returns { node: ASTNode, cursor: number } - The parsed AST node and the updated cursor position.
+ */
 export function parseBinaryExpression(
     tokens: Token[],
     cursor: number

@@ -1,3 +1,9 @@
+/**
+ * @file IfStatement.ts
+ * @description This file contains the function to parse if statements in the language.
+ * @includes parseIfStatement
+ * @exports parseIfStatement
+ */
 import { Token } from "../../lexer/token_type/Token";
 import { ASTNodeType, IfStatementNode, BlockStatementNode, BinaryExpressionNode, NumericLiteralNode, BooleanLiteralNode, IdentifierNode, ASTNode, StringNode, BreakStatementNode, ContinueStatementNode } from "../AST/ast";
 import { CustomError } from "../errors/CustomErrors";
@@ -6,6 +12,20 @@ import { parseAssignmentStatement } from "./AssignmentOperator";
 import { parsePrintStatement } from "./PrintStatement";
 import { parseVariableDeclaration } from "./VariableDeclaration";
 
+/**
+ * @function parseIfStatement
+ * @param tokens - The list of tokens to be parsed.
+ * @param cursor - The current position in the list of tokens.
+ * @param declaredVariables - A map of declared variables for scope resolution.
+ * @param reportError - A function to report errors during parsing.
+ * @description This function parses an if statement from the list of tokens.
+ * It expects the if statement to start with 'yedi' followed by a condition in parentheses.
+ * The body of the if statement is expected to be enclosed in braces '{ }'.
+ * It also supports else if and else clauses.
+ * If any of these conditions are not met, an error is reported.
+ * @throws {CustomError} - If the syntax is incorrect or if expected tokens are not found.
+ * @returns { ifStatement: IfStatementNode, cursor: number } - The parsed if statement and the updated cursor position.
+ */
 export function parseIfStatement(
     tokens: Token[],
     cursor: number,
@@ -14,19 +34,41 @@ export function parseIfStatement(
 ): { ifStatement: IfStatementNode, cursor: number } {
     let _cursor = cursor;
 
+    /**
+     * @function advance
+     * @description Advances the cursor to the next token.
+     * @returns {Token} - The current token after advancing.
+     */
     function advance(): Token {
         return tokens[_cursor++];
     }
 
+    /**
+     * @function peek
+     * @description Returns the current token without advancing the cursor.
+     * @returns {Token} - The current token.
+     */
     function peek(): Token {
         return tokens[_cursor];
     }
 
+    /**
+     * @function match
+     * @description Checks if the current token matches any of the specified types.
+     * @param types - The types to check against.
+     * @returns {boolean} - True if the current token matches any of the specified types, false otherwise.
+     */
     function match(...types: string[]): boolean {
         if (_cursor >= tokens.length) return false;
         return types.includes(peek().type);
     }
 
+    /**
+     * @function parseExpression
+     * @description Parses an expression based on operator precedence.
+     * @param precedence - The precedence level for parsing.
+     * @returns {ASTNode} - The parsed expression node.
+     */
     function parseExpression(precedence = 0): ASTNode {
         let left = parsePrimaryExpression();
 
@@ -44,6 +86,12 @@ export function parseIfStatement(
         return left;
     }
 
+    /**
+     * @function getPrecedence
+     * @description Returns the precedence level of the given operator.
+     * @param operator - The operator to check.
+     * @returns {number} - The precedence level of the operator.
+     */
     function getPrecedence(operator: string): number {
         switch (operator) {
             case "==":
@@ -66,6 +114,11 @@ export function parseIfStatement(
         }
     }
 
+    /**
+     * @function parsePrimaryExpression
+     * @description Parses a primary expression (number, string, identifier, or parenthesized expression).
+     * @returns {ASTNode} - The parsed primary expression node.
+     */
     function parsePrimaryExpression(): ASTNode {
         const token = peek();
 
@@ -114,6 +167,13 @@ export function parseIfStatement(
         throw new CustomError(`Unexpected token: ${token.value}`);
     }
 
+    /**
+     * @function parseBlockStatement
+     * @description Parses a block statement enclosed in braces '{ }'.
+     * @returns {BlockStatementNode} - The parsed block statement node.
+     * @throws {CustomError} - If the syntax is incorrect or if expected tokens are not found.
+     * @throws {Error} - If an unexpected token is encountered.
+     */
     function parseBlockStatement(): BlockStatementNode {
         const body: ASTNode[] = [];
 

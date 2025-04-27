@@ -1,3 +1,9 @@
+/**
+ * @file ast.ts
+ * @description This file contains the abstract syntax tree (AST) node types and interfaces for the language parser.
+ * @includes ASTNodeType, ASTNode, ProgramNode, VariableDeclarationNode, BinaryExpressionNode, IdentifierNode, NumericLiteralNode, PrintNode, StringNode, AssignmentNode, NullTypeNode, IncrementNode, IfStatementNode, BlockStatementNode, BooleanLiteralNode, WhileStatementNode, BreakStatementNode, ContinueStatementNode, FunctionDeclarationNode, FunctionCallNode
+ * @exports ASTNodeType, ASTNode, ProgramNode, VariableDeclarationNode, BinaryExpressionNode, IdentifierNode, NumericLiteralNode, PrintNode, StringNode, AssignmentNode, NullTypeNode, IncrementNode, IfStatementNode, BlockStatementNode, BooleanLiteralNode, WhileStatementNode, BreakStatementNode, ContinueStatementNode, FunctionDeclarationNode, FunctionCallNode
+ */
 export enum ASTNodeType {
     Program = "Program",
     VariableDeclaration = "VariableDeclaration",

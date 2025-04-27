@@ -1,5 +1,17 @@
+/**
+ * @file Scope.ts
+ * @description This file contains the Scope class for managing variable scopes in the interpreter.
+ * @includes Scope
+ * @exports Scope, createGlobalScope
+ * @requires RuntimeVal
+ */
 import { RuntimeVal } from "../interpreter/semanticAnalyzer/values";
 
+/**
+ * @class Scope
+ * @description This class represents a scope for variable declarations and lookups.
+ * It supports nested scopes, allowing for child scopes to inherit variables from parent scopes.
+ */
 export class Scope {
     private variables: Map<string, RuntimeVal> = new Map();
     private parentScope: Scope | null;

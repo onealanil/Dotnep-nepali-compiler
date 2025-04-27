@@ -1,8 +1,12 @@
 #!/usr/bin/env node
-
+/**
+ * @file cli.ts
+ * @description Command Line Interface (CLI) for compiling .nep files.
+ * This script reads a .nep file, compiles it, and outputs the results.
+ */
 import fs from "fs";
 import path from "path";
-import { compile, resetCompilerState } from "./index"; 
+import { compile, resetCompilerState } from "./index";
 
 const filePath = process.argv[2];
 
@@ -17,10 +21,10 @@ if (!filePath.endsWith('.nep')) {
 }
 
 try {
-  const code = fs.readFileSync(path.resolve(filePath), 'utf8');  
+  const code = fs.readFileSync(path.resolve(filePath), 'utf8');
 
   console.log('🚀 Compiling .nep file...');
-  
+
   resetCompilerState();
   const startTime = Date.now();
   const { results, outputs } = compile(code);

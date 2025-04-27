@@ -1,4 +1,7 @@
-//token Types
+/**
+ * @file TokenType.ts
+ * @description This file contains the TokenType enum which defines various token types used in the lexer.
+ */
 export enum TokenType {
     KEYWORD = "KEYWORD",
     IDENTIFIER = "IDENTIFIER",
